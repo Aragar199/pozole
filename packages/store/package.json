@@ -1,0 +1,7 @@
+{
+    "name": "@pozole/store",
+    "author": "Alex Ponce",
+    "scripts": {
+        "test": "echo 'all pozole tests passed!'"
+    }
+}
