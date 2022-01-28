@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import web3Reducer from './features/web3'
-import { initializeWeb3 } from './sagas/web3Saga'
+import { rootSaga } from './sagas/rootSaga'
 import createSagaMiddleware from 'redux-saga'
 
 const sagaMiddleware = createSagaMiddleware()
@@ -12,7 +12,7 @@ export const store = configureStore({
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware)
 })
 
-sagaMiddleware.run(initializeWeb3)
+sagaMiddleware.run(rootSaga)
 
 export type AppDispatch = typeof store.dispatch
 export type RootState = ReturnType<typeof store.getState>
