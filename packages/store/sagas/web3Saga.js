@@ -1,5 +1,6 @@
 import Eth from 'web3-eth'
-import { initialized, failed, userDeniedAccess, networkIdFetched, networkIdFailed } from '../features/web3'
+import * as web3Actions from '../features/web3'
+// import { initialized, failed, userDeniedAccess, networkIdFetched, networkIdFailed } from '../features/web3'
 import { call, put } from 'redux-saga/effects'
 
 export function * initializeWeb3 () {
@@ -10,16 +11,16 @@ export function * initializeWeb3 () {
             try {
                 const selectedAccount = yield call([ethereum, 'request'], {method: 'eth_requestAccounts'})
 
-                yield put({ type: initialized })
+                yield put({ type: web3Actions.initialized })
 
                 if(!selectedAccount) {
-                    yield put({type: userDeniedAccess})
+                    yield put({type: web3Actions.userDeniedAccess})
                     return
                 }
                 return web3
             } catch (error) {
                 console.error(error)
-                yield put({type: failed})
+                yield put({type: web3Actions.failed})
                 return
             }
         }
@@ -33,10 +34,10 @@ export function * getNetworkId({ web3 }) {
     try {
         const networkId = yield call(web3.eth.net.getId)
 
-        yield put({ type: networkIdFetched })
+        yield put({ type: web3Actions.networkIdFetched })
         return networkId
     } catch (error) {
-        yield put({ type: networkIdFailed })
+        yield put({ type: web3Actions.networkIdFailed })
 
         console.error('Error fetching network ID: ', error)
     }
