@@ -11,7 +11,7 @@ export const store = configureStore({
     reducer: { 
         pozoleStatus: pozolestatusReducer,
         web3: web3Reducer,
-        accountStatus: accountstateReducer,
+        accounts: accountstateReducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware)
 })

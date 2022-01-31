@@ -1,23 +1,27 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { AnyObject } from "immer/dist/internal"
 
-interface accountState {
-    accounts: Array<string>
+interface accountsState {
+    accountsSelected: Array<string>,
+    accountsBalance: {[key: string]: number}
 }
 
-const initialState: accountState = {
-    accounts: []
+const initialState: accountsState = {
+    accountsSelected: [],
+    accountsBalance: {}
 }
 
 const accountstateSlice = createSlice({
-    name: 'accountStatus',
+    name: 'accounts',
     initialState,
     reducers: {
         accountFetching(state) {
             state
         },
-        accountFetched(state, action: PayloadAction<Array<string>>){
-            state.accounts = action.payload
+        accountsFetched(state, action: PayloadAction<Array<string>>){
+            state.accountsSelected = action.payload
+        },
+        accountBalanceFetched(state, action: PayloadAction<{account: string, balance: number}>){
+            state.accountsBalance[action.payload.account] = action.payload.balance
         },
         accountFailed(error) {
             error
@@ -25,5 +29,5 @@ const accountstateSlice = createSlice({
     }
 })
 
-export const { accountFetched, accountFetching, accountFailed } = accountstateSlice.actions
+export const { accountsFetched, accountFetching, accountBalanceFetched, accountFailed } = accountstateSlice.actions
 export default accountstateSlice.reducer
