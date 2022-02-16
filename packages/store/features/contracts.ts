@@ -50,5 +50,5 @@ const contractsSlice = createSlice({
     }
 })
 
-export const { initializing } = contractsSlice.actions
+export const { initializing, initialized, deleted, syncing, gotvars, gotvarserror, eventfired } = contractsSlice.actions
 export default contractsSlice.reducer
