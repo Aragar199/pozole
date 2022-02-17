@@ -1,9 +1,16 @@
-import { useState } from 'react'
+import React from 'react'
+import { useAppDispatch, useAppSelector } from '../packages/hooks'
 import logo from './logo.svg'
 import './App.css'
+import { getAccountBalance, getAccounts, getSelectedAccounts } from '../packages/store/sagas/accountSaga'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const selected = useAppSelector((state) => state.accounts.accountsSelected)
+  const dispatch = useAppDispatch()
+
+  function handleClick() {
+    dispatch(getAccountBalance)
+  }
 
   return (
     <div className="App">
@@ -11,8 +18,9 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>Hello Vite + React!</p>
         <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
+          <button onClick={handleClick}>
+            account selected is { selected }
+            
           </button>
         </p>
         <p>
