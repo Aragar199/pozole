@@ -1,5 +1,8 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { generateContractInitialState } from '../../utils/contractState'
+
+export const eventchanged = createAction<undefined>('contracts/eventchanged')
+export const eventerror = createAction<undefined>('contracts/eventerror')
 
 interface contracts {
     [k: string]: any
