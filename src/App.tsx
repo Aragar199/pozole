@@ -6,11 +6,7 @@ import { getAccountBalance, getAccounts, getSelectedAccounts } from '../packages
 
 function App() {
   const selected = useAppSelector((state) => state.accounts.accountsSelected)
-  const dispatch = useAppDispatch()
-
-  function handleClick() {
-    dispatch(getAccountBalance)
-  }
+  const value = useAppSelector((state) => state.accounts.accountsBalance[selected[0]])
 
   return (
     <div className="App">
@@ -18,11 +14,9 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>Hello Vite + React!</p>
         <p>
-          <button onClick={handleClick}>
-            account selected is { selected }
-            
-          </button>
+          account selected is { selected }          
         </p>
+          account balance is { value }
         <p>
           Edit <code>App.tsx</code> and save to test HMR updates.
         </p>
